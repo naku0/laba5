@@ -51,6 +51,27 @@ public class Person {
         return Objects.hash(id);
     }
 
+    public long getId() {
+        return id;
+    }
+
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Person person = (Person) object;
+        return Objects.equals(id,person.id);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, coordinates, creationDate, height, passportID, hairColor, nationality, location);
+    }
+
     @Override
     public String toString() {
         return "{" +

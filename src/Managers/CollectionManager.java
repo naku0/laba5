@@ -16,10 +16,24 @@ public class CollectionManager {
     public Vector<Person> getMyLittleCollection() {
         return MyLittleCollection;
     }
+
+    public boolean idIdentifier(Person person) {
+        for (Person value : MyLittleCollection) {
+            if (person.getId() == value.getId()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void add(Person person) throws InvalidDataException {
-        if(!(person.validated())) throw new InvalidDataException();
+        if (!(person.validated())) throw new InvalidDataException();
+        if(idIdentifier(person)){
+            person.setId(person.generateId());
+        }
         MyLittleCollection.add(person);
     }
+
     public void show() throws EmptyCollectionException {
         if (!MyLittleCollection.isEmpty()) {
             System.out.println("Содержимое коллекции:");
