@@ -34,5 +34,7 @@ public class Input {
         commandManager.addCommand(new Help());
         commandManager.addCommand(new Add(this.collectionManager));
         commandManager.addCommand(new Show(this.collectionManager));
+        commandManager.addCommand(new Info(this.collectionManager));
+        commandManager.addCommand(new RemoveElementById(this.collectionManager));
     }
 }

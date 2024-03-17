@@ -35,14 +35,14 @@ public class BuilderOfEnum<T extends Enum<T>> {
                         enumValue = values[index - 1];
                     }
                 } catch (NumberFormatException ex) {
-                    System.out.println("Некорректный ввод!");
+                    System.err.println("Некорректный ввод!");
                 }
             }
             if (enumValue != null) {
                 System.out.println("Выбранное значение: " + enumValue);
                 return enumValue;
             } else {
-                System.out.println("Неверное значение :(");
+                System.err.println("Неверное значение :(");
             }
         }
     }

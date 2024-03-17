@@ -4,11 +4,15 @@ import Exceptions.EmptyCollectionException;
 import Exceptions.InvalidDataException;
 import data.Person;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 public class CollectionManager {
+    private final LocalDate localdate;
     public CollectionManager() {
-
+        localdate = LocalDate.parse(LocalDate.now().toString());
     }
 
     private final Vector<Person> MyLittleCollection = new Vector<>();
@@ -24,6 +28,14 @@ public class CollectionManager {
             }
         }
         return true;
+    }
+    public Person getPersonById(int id){
+        for (Person person : MyLittleCollection){
+            if (id == person.getId()){
+                return person;
+            }
+        }
+        return null;
     }
 
     public void add(Person person) throws InvalidDataException {
@@ -45,6 +57,18 @@ public class CollectionManager {
             }
         } else {
             throw new EmptyCollectionException();
+        }
+    }
+    public void getInfo(){
+        System.out.println("Сохраняемый тип данных: " + Person.class +
+                ", количество человек: " + MyLittleCollection.size() +
+                ", дата инициализации:" + localdate);
+    }
+    public void removeElement(Person person) throws NoSuchElementException{
+        if(MyLittleCollection.contains(person)){
+            MyLittleCollection.remove(person);
+        }else{
+            throw new NoSuchElementException();
         }
     }
 }
