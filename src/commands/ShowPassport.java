@@ -1,5 +1,6 @@
 package commands;
 
+import Exceptions.EmptyCollectionException;
 import Interfaces.CommandExecutor;
 import Managers.CollectionManager;
 
@@ -12,6 +13,10 @@ public class ShowPassport extends Command implements CommandExecutor {
 
     @Override
     public void execute(String args) {
-        collectionManager.showData(person -> Integer.parseInt(person.getPassportID()));
+        try{
+        collectionManager.showData(person -> Integer.parseInt(person.getPassportID()), false);
+        }catch (EmptyCollectionException e){
+            System.err.println("В коллекции ещё ничего нет, но это можно исправить!");
+        }
     }
 }

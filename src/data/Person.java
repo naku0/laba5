@@ -67,16 +67,13 @@ public class Person implements Validatable {
         return height;
     }
 
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
 
     public String getPassportID() {
         return passportID;
     }
 
-    public void setPassportID(String passportID) {
-        this.passportID = passportID;
+    public Color getHairColor() {
+        return hairColor;
     }
 
     @Override

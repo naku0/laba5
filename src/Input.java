@@ -18,12 +18,12 @@ public class Input {
     public void listen() throws NoSuchElementException {
         while (true) {
             try {
-                String CommandToSplit = (scanner.nextLine().trim() + " ").toLowerCase();
+                String CommandToSplit = scanner.nextLine().trim() + " ";
                 String[] command = CommandToSplit.split(" ", 2);
                 commandManager.execute(command[0], command[1]);
             } catch (NoSuchElementException e) {
-                System.out.println("За что ты меня так :(");
-                System.exit(0);
+                System.err.println("давайте не будем так делать >:(");
+                break;
             }
         }
     }
@@ -38,5 +38,9 @@ public class Input {
         commandManager.addCommand(new RemoveElementById(this.collectionManager));
         commandManager.addCommand(new ShowPassport(this.collectionManager));
         commandManager.addCommand(new ShowHeight(this.collectionManager));
+        commandManager.addCommand(new ShowHairColors(this.collectionManager));
+        commandManager.addCommand(new Clear(this.collectionManager));
+        commandManager.addCommand(new UpdateId(this.collectionManager));
+        commandManager.addCommand(new Reorder(this.collectionManager));
     }
 }
