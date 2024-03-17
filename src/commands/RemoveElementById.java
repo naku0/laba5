@@ -1,10 +1,11 @@
 package commands;
 
+import Interfaces.CommandExecutor;
 import Managers.CollectionManager;
 
 import java.util.NoSuchElementException;
 
-public class RemoveElementById extends Command implements CommandExecutor{
+public class RemoveElementById extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public RemoveElementById(CollectionManager collectionManager) {
         super("remove_by_id");

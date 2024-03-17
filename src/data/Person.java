@@ -1,11 +1,13 @@
 package data;
 
 import Exceptions.InvalidDataException;
+import Interfaces.Validatable;
 
+import javax.xml.validation.Validator;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
-public class Person {
+public class Person implements Validatable {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -30,13 +32,14 @@ public class Person {
         this.location = location;
     }
 
+    @Override
     public boolean validated() {
         return this.id > 0
                 && this.passportID != null
                 && !this.name.isEmpty()
-                && this.coordinates != null && coordinates.validate()
+                && this.coordinates != null && coordinates.validated()
                 && this.height != null && this.height > 0
-                && this.location != null && this.location.validate();
+                && this.location != null && this.location.validated();
     }
 
 
@@ -58,6 +61,22 @@ public class Person {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public String getPassportID() {
+        return passportID;
+    }
+
+    public void setPassportID(String passportID) {
+        this.passportID = passportID;
     }
 
     @Override

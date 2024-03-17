@@ -1,6 +1,8 @@
 package commands;
 
-public class Help extends Command implements CommandExecutor{
+import Interfaces.CommandExecutor;
+
+public class Help extends Command implements CommandExecutor {
         public Help() {
         super("help");
     }

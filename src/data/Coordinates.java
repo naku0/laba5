@@ -1,6 +1,8 @@
 package data;
 
-public class Coordinates {
+import Interfaces.Validatable;
+
+public class Coordinates implements Validatable {
     private double x;
     private double y; //Значение поля должно быть больше -615
 
@@ -9,7 +11,8 @@ public class Coordinates {
         this.y = y;
     }
 
-    public boolean validate() {
+    @Override
+    public boolean validated() {
         return y > -615;
     }
 

@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Input {
-    private CommandManager commandManager;
-    private CollectionManager collectionManager;
+    private final CommandManager commandManager;
+    private final CollectionManager collectionManager;
     Scanner scanner = new Scanner(System.in);
 
     public Input(CommandManager commandManager, CollectionManager collectionManager) {
@@ -36,5 +36,7 @@ public class Input {
         commandManager.addCommand(new Show(this.collectionManager));
         commandManager.addCommand(new Info(this.collectionManager));
         commandManager.addCommand(new RemoveElementById(this.collectionManager));
+        commandManager.addCommand(new ShowPassport(this.collectionManager));
+        commandManager.addCommand(new ShowHeight(this.collectionManager));
     }
 }

@@ -5,9 +5,8 @@ import Exceptions.InvalidDataException;
 import data.Person;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.NoSuchElementException;
-import java.util.Vector;
+import java.util.*;
+import java.util.function.Function;
 
 public class CollectionManager {
     private final LocalDate localdate;
@@ -70,6 +69,14 @@ public class CollectionManager {
         }else{
             throw new NoSuchElementException();
         }
+    }
+    public void showData(Function<Person,Integer> mapper){
+        List<Integer> data = new ArrayList<>(MyLittleCollection.size());
+        for(Person person: MyLittleCollection){
+            data.add(mapper.apply(person));
+        }
+        Collections.sort(data);
+        System.out.println(data);
     }
 }
 

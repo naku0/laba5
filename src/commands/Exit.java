@@ -1,6 +1,8 @@
 package commands;
 
 
+import Interfaces.CommandExecutor;
+
 public class Exit extends Command implements CommandExecutor {
 
 public Exit(){

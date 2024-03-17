@@ -1,6 +1,7 @@
 package commands;
 
 import Exceptions.EmptyCollectionException;
+import Interfaces.CommandExecutor;
 import Managers.CollectionManager;
 
 public class Show extends Command implements CommandExecutor {

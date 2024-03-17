@@ -2,16 +2,17 @@ package commands;
 
 import Interfaces.CommandExecutor;
 import Managers.CollectionManager;
+import data.Person;
 
-public class Info extends Command implements CommandExecutor {
+public class ShowHeight extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
-    public Info(CollectionManager collectionManager) {
-        super("info");
+    public ShowHeight(CollectionManager collectionManager) {
+        super("print_field_descending_height");
         this.collectionManager = collectionManager;
     }
 
     @Override
     public void execute(String args) {
-        collectionManager.getInfo();
+        collectionManager.showData(Person::getHeight);
     }
 }

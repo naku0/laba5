@@ -1,6 +1,8 @@
 package data;
 
-public class Location {
+import Interfaces.Validatable;
+
+public class Location implements Validatable {
     private long x;
     private int y;
     private Long z; //Поле не может быть null
@@ -13,7 +15,8 @@ public class Location {
         this.name = name;
     }
 
-    public boolean validate() {
+    @Override
+    public boolean validated() {
         return z != null && name.length() < 444;
     }
 
