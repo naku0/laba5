@@ -42,5 +42,7 @@ public class Input {
         commandManager.addCommand(new Clear(this.collectionManager));
         commandManager.addCommand(new UpdateId(this.collectionManager));
         commandManager.addCommand(new Reorder(this.collectionManager));
+        commandManager.addCommand(new Save(this.collectionManager));
+        commandManager.addCommand(new Shuffle(this.collectionManager));
     }
 }

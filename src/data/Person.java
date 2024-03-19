@@ -3,10 +3,13 @@ package data;
 import Exceptions.InvalidDataException;
 import Interfaces.Validatable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.validation.Validator;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+@XmlRootElement
 public class Person implements Validatable {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -54,35 +57,41 @@ public class Person implements Validatable {
         return Objects.hash(id);
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @XmlElement
     public long getId() {
         return id;
     }
 
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
+    @XmlElement
     public Integer getHeight() {
         return height;
     }
 
-
+    @XmlElement
     public String getPassportID() {
         return passportID;
     }
 
+    @XmlElement
     public Color getHairColor() {
         return hairColor;
     }
+
+
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Person person = (Person) object;
-        return Objects.equals(id,person.id);
+        return Objects.equals(id, person.id);
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id, name, coordinates, creationDate, height, passportID, hairColor, nationality, location);
@@ -92,8 +101,8 @@ public class Person implements Validatable {
     public String toString() {
         return "{" +
                 "id=" + id +
-                ", name='" + name + '\''+
-        ", coordinates=" + coordinates +
+                ", name='" + name + '\'' +
+                ", coordinates=" + coordinates +
                 ", creationDate=" + creationDate +
                 ", height=" + height +
                 ", passportID='" + passportID + '\'' +

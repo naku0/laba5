@@ -48,6 +48,7 @@ public class CollectionManager {
         }
         MyLittleCollection.add(person);
     }
+
     public void updateID(Long id) throws InvalidDataException, NoSuchElementException {
         Person oldPerson = getPersonById(id);
         if (oldPerson == null) {
@@ -90,12 +91,18 @@ public class CollectionManager {
     }
 
     public void reorder() throws EmptyCollectionException {
-        if(MyLittleCollection.isEmpty())throw new EmptyCollectionException();
+        if (MyLittleCollection.isEmpty()) throw new EmptyCollectionException();
         Collections.reverse(MyLittleCollection);
         System.out.println("Коллекция перевернулась!");
     }
 
-    public void showData(Function<Person, Integer> mapper, boolean reversed) throws EmptyCollectionException{
+    public void shuffle() throws EmptyCollectionException {
+        if (MyLittleCollection.isEmpty()) throw new EmptyCollectionException();
+        Collections.shuffle(MyLittleCollection);
+        System.out.println("Коллекция перемешалась!");
+    }
+
+    public void showData(Function<Person, Integer> mapper, boolean reversed) throws EmptyCollectionException {
         List<Integer> data = new ArrayList<>(MyLittleCollection.size());
         for (Person person : MyLittleCollection) {
             data.add(mapper.apply(person));
@@ -107,6 +114,7 @@ public class CollectionManager {
         }
         System.out.println(data);
     }
+
     public void clear() {
         if (MyLittleCollection.isEmpty()) {
             System.err.println("Нельзя очистить то, что пусто. Давайте для начала внесем данные");
@@ -116,7 +124,7 @@ public class CollectionManager {
         }
     }
 
-    public void showHairColors() throws EmptyCollectionException{
+    public void showHairColors() throws EmptyCollectionException {
         Class<Color> colorClass = Color.class;
         Color[] values = colorClass.getEnumConstants();
         List<String> existingHair = new ArrayList<>(MyLittleCollection.size());
@@ -130,6 +138,16 @@ public class CollectionManager {
         }
         existingHair.sort(Collections.reverseOrder());
         System.out.println(existingHair);
+    }
+
+    public void save() {
+        if (MyLittleCollection.isEmpty()) {
+            System.err.println("Нельзя сохранить то, чего нет. Давайте что-нибудь создадим!");
+        } else {
+            for (Person person : MyLittleCollection) {
+                FileManager.writeToXmlFile(MyLittleCollection, person);
+            }
+        }
     }
 }
 
