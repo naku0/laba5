@@ -1,13 +1,17 @@
 package commands;
 
 import Interfaces.CommandExecutor;
+import Managers.CollectionManager;
 
 public class Help extends Command implements CommandExecutor {
-        public Help() {
+    private final CollectionManager collectionManager;
+        public Help(CollectionManager collectionManager) {
         super("help");
+        this.collectionManager = collectionManager;
+
     }
     @Override
     public void execute(String args) {
-        System.out.println("Будет чуть позже");
+        collectionManager.help();
     }
 }

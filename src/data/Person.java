@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
-public class Person implements Validatable {
+public class Person implements Validatable, Comparable<Person> {
 
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -170,4 +170,8 @@ public class Person implements Validatable {
     }
 
 
+    @Override
+    public int compareTo(Person other) {
+        return Long.compare(this.id, other.id);
+    }
 }

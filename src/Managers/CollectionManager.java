@@ -5,7 +5,6 @@ import Exceptions.EmptyCollectionException;
 import Exceptions.InvalidDataException;
 import data.Color;
 import data.Person;
-import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -18,23 +17,38 @@ public class CollectionManager {
         localdate = LocalDate.parse(LocalDate.now().toString());
     }
 
-    private final Vector<Person> MyLittleCollection = new Vector<>();
-
-    public Vector<Person> getMyLittleCollection() {
-        return MyLittleCollection;
-    }
+    private final Vector<Person> MyLittleCollectionOfPeople = new Vector<>();
 
     public boolean idIdentifier(Person person) {
-        for (Person value : MyLittleCollection) {
+        for (Person value : MyLittleCollectionOfPeople) {
             if (person.getId() == value.getId()) {
                 return false;
             }
         }
         return true;
     }
+    public void help(){
+        System.out.println("""
+        help : вывести справку по доступным командам
+        info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+        show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
+        add {element} : добавить новый элемент в коллекцию
+        update id {element} : обновить значение элемента коллекции, id которого равен заданному
+        remove_by_id id : удалить элемент из коллекции по его id
+        clear : очистить коллекцию
+        save : сохранить коллекцию в файл
+        execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+        exit : завершить программу (без сохранения в файл)
+        add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
+        shuffle : перемешать элементы коллекции в случайном порядке
+        reorder : отсортировать коллекцию в порядке, обратном нынешнему
+        print_field_ascending_passport_i_d : вывести значения поля passportID всех элементов в порядке возрастания
+        print_field_descending_height : вывести значения поля height всех элементов в порядке убывания
+        print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);""");
+    }
 
     public Person getPersonById(long id) {
-        for (Person person : MyLittleCollection) {
+        for (Person person : MyLittleCollectionOfPeople) {
             if (id == person.getId()) {
                 return person;
             }
@@ -47,7 +61,8 @@ public class CollectionManager {
         if (idIdentifier(person)) {
             person.setId(person.generateId());
         }
-        MyLittleCollection.add(person);
+        MyLittleCollectionOfPeople.add(person);
+        Collections.sort(MyLittleCollectionOfPeople);
     }
 
     public void updateID(Long id) throws InvalidDataException, NoSuchElementException {
@@ -55,18 +70,18 @@ public class CollectionManager {
         if (oldPerson == null) {
             throw new NoSuchElementException("Такого человечка нет в коллекции, возможно вы ошиблись");
         }
-        MyLittleCollection.remove(oldPerson);
+        MyLittleCollectionOfPeople.remove(oldPerson);
         PersonBuilder person = new PersonBuilder();
         Person newPerson = person.create();
         newPerson.setId(id);
-        MyLittleCollection.add(newPerson);
+        MyLittleCollectionOfPeople.add(newPerson);
     }
 
 
     public void show() throws EmptyCollectionException {
-        if (!MyLittleCollection.isEmpty()) {
+        if (!MyLittleCollectionOfPeople.isEmpty()) {
             System.out.println("Содержимое коллекции:");
-            for (Person i : MyLittleCollection) {
+            for (Person i : MyLittleCollectionOfPeople) {
                 {
                     System.out.println(i);
                 }
@@ -79,33 +94,33 @@ public class CollectionManager {
 
     public void getInfo() {
         System.out.println("Сохраняемый тип данных: " + Person.class +
-                ", количество человек: " + MyLittleCollection.size() +
+                ", количество человек: " + MyLittleCollectionOfPeople.size() +
                 ", дата инициализации:" + localdate);
     }
 
     public void removeElement(Person person) throws NoSuchElementException {
-        if (MyLittleCollection.contains(person)) {
-            MyLittleCollection.remove(person);
+        if (MyLittleCollectionOfPeople.contains(person)) {
+            MyLittleCollectionOfPeople.remove(person);
         } else {
             throw new NoSuchElementException();
         }
     }
 
     public void reorder() throws EmptyCollectionException {
-        if (MyLittleCollection.isEmpty()) throw new EmptyCollectionException();
-        Collections.reverse(MyLittleCollection);
+        if (MyLittleCollectionOfPeople.isEmpty()) throw new EmptyCollectionException();
+        Collections.reverse(MyLittleCollectionOfPeople);
         System.out.println("Коллекция перевернулась!");
     }
 
     public void shuffle() throws EmptyCollectionException {
-        if (MyLittleCollection.isEmpty()) throw new EmptyCollectionException();
-        Collections.shuffle(MyLittleCollection);
+        if (MyLittleCollectionOfPeople.isEmpty()) throw new EmptyCollectionException();
+        Collections.shuffle(MyLittleCollectionOfPeople);
         System.out.println("Коллекция перемешалась!");
     }
 
     public void showData(Function<Person, Integer> mapper, boolean reversed) throws EmptyCollectionException {
-        List<Integer> data = new ArrayList<>(MyLittleCollection.size());
-        for (Person person : MyLittleCollection) {
+        List<Integer> data = new ArrayList<>(MyLittleCollectionOfPeople.size());
+        for (Person person : MyLittleCollectionOfPeople) {
             data.add(mapper.apply(person));
         }
         if (!reversed) {
@@ -117,10 +132,10 @@ public class CollectionManager {
     }
 
     public void clear() {
-        if (MyLittleCollection.isEmpty()) {
+        if (MyLittleCollectionOfPeople.isEmpty()) {
             System.err.println("Нельзя очистить то, что пусто. Давайте для начала внесем данные");
         } else {
-            MyLittleCollection.clear();
+            MyLittleCollectionOfPeople.clear();
             System.out.println("Коллекция очищена!");
         }
     }
@@ -128,8 +143,8 @@ public class CollectionManager {
     public void showHairColors() throws EmptyCollectionException {
         Class<Color> colorClass = Color.class;
         Color[] values = colorClass.getEnumConstants();
-        List<String> existingHair = new ArrayList<>(MyLittleCollection.size());
-        for (Person person : MyLittleCollection) {
+        List<String> existingHair = new ArrayList<>(MyLittleCollectionOfPeople.size());
+        for (Person person : MyLittleCollectionOfPeople) {
             for (int i = 0; i < values.length; i++) {
                 if (values[i].equals(person.getHairColor())) {
                     existingHair.add(i, (String.valueOf(person.getHairColor())));
@@ -142,7 +157,7 @@ public class CollectionManager {
     }
 
     public void save() {
-        if (MyLittleCollection.isEmpty()) {
+        if (MyLittleCollectionOfPeople.isEmpty()) {
             System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?");
             System.out.println("y/n");
             while (true) {
@@ -155,7 +170,7 @@ public class CollectionManager {
                     }
                else if(answer.equals("n")){
                    String filePath = System.getenv("XML_FILE_PATH");
-                   MyLittleCollection.addAll(FileManager.readFile(filePath).getPeople());
+                   MyLittleCollectionOfPeople.addAll(FileManager.readFile(filePath).getPeople());
                    System.out.println("Сохранение восстановлено");
                         return;
                     }
@@ -164,12 +179,22 @@ public class CollectionManager {
             }
         }
     }else{
-        FileManager.writeFile(MyLittleCollection);
+        FileManager.writeFile(MyLittleCollectionOfPeople);
     }
 
 }
     public void addToCollection(List<Person> people) {
-        MyLittleCollection.addAll(people);
+        MyLittleCollectionOfPeople.addAll(people);
+    }
+
+    public void addIfMax(Long id){
+        Collections.sort(MyLittleCollectionOfPeople);
+        if(MyLittleCollectionOfPeople.get(MyLittleCollectionOfPeople.size()-1).getId() < id){
+            PersonBuilder newPerson = new PersonBuilder();
+            Person person = newPerson.create();
+            person.setId(id);
+            MyLittleCollectionOfPeople.add(person);
+        }
     }
 }
 

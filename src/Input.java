@@ -20,7 +20,7 @@ public class Input {
     public void listen() throws NoSuchElementException {
         while (true) {
             try {
-                String CommandToSplit = scanner.nextLine().trim() + " ";
+                String CommandToSplit = (scanner.nextLine().trim() + " ").toLowerCase();
                 String[] command = CommandToSplit.split(" ", 2);
                 commandManager.execute(command[0], command[1]);
             } catch (NoSuchElementException e) {
@@ -33,7 +33,7 @@ public class Input {
     public void addCommands(CommandManager commandManager) {
         System.out.println("Введите команду 'help' для того, чтобы вывести все доступные команды.");
         commandManager.addCommand(new Exit());
-        commandManager.addCommand(new Help());
+        commandManager.addCommand(new Help(this.collectionManager));
         commandManager.addCommand(new Add(this.collectionManager));
         commandManager.addCommand(new Show(this.collectionManager));
         commandManager.addCommand(new Info(this.collectionManager));
