@@ -1,4 +1,5 @@
 package Managers;
+
 import data.Community;
 import data.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileManager {
+    static String filePath = System.getenv("XML_FILE_PATH");
 
     public static Community readFile(String filePath) {
         File file = new File(filePath);
@@ -22,9 +24,9 @@ public class FileManager {
                 String line = scanner.nextLine();
                 stringBuilder.append(line).append("\n");
             }
-            if(stringBuilder.isEmpty()){
+            if (stringBuilder.isEmpty()) {
                 System.out.println("Похоже у вас еще нет объектов, давайте создадим парочку!");
-            }else {
+            } else {
                 JAXBContext context = JAXBContext.newInstance(Community.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 return (Community) unmarshaller.unmarshal(new StringReader(stringBuilder.toString()));
@@ -38,11 +40,14 @@ public class FileManager {
     }
 
     public static void writeFile(List<Person> collection) {
-        String filePath = System.getenv("XML_FILE_PATH");
+        File file = new File(filePath);
         try {
             if (filePath == null) {
                 System.err.println("Переменная окружения XML_FILE_PATH не установлена");
                 return;
+            }
+            if(!(file.length()==0)){
+                clearFile();
             }
             Community community = new Community();
             for (Person person : collection) {
@@ -63,9 +68,17 @@ public class FileManager {
             System.out.println("Данные успешно записаны в XML файл!");
         } catch (IOException | JAXBException e) {
             System.err.println("Что-то пошло не так при записи в файл, попробуйте снова");
-            e.printStackTrace();
         } catch (SecurityException e) {
             System.err.println("Недостаточно прав доступа для доступа к переменной окружения или файлу");
+        }
+    }
+    public static void clearFile() {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write("");
+            fileWriter.close();
+        }catch (IOException e){
+            System.err.println("При очистке файл произошла ошибка");
         }
     }
 }

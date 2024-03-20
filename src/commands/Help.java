@@ -8,6 +8,6 @@ public class Help extends Command implements CommandExecutor {
     }
     @Override
     public void execute(String args) {
-        System.out.println("HELP");
+        System.out.println("Будет чуть позже");
     }
 }

@@ -9,7 +9,5 @@ public class Main {
         input.addCommands(commandManager);
         input.addData();
         input.listen();
-        /*Принтер принтер = new Принтер("Принтер");
-        принтер.печатать();*/
     }
 }

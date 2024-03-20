@@ -5,6 +5,7 @@ import Exceptions.EmptyCollectionException;
 import Exceptions.InvalidDataException;
 import data.Color;
 import data.Person;
+import org.w3c.dom.ls.LSOutput;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -142,12 +143,32 @@ public class CollectionManager {
 
     public void save() {
         if (MyLittleCollection.isEmpty()) {
-            System.err.println("Нельзя сохранить то, чего нет. Давайте что-нибудь создадим!");
-        } else {
-                FileManager.writeFile(MyLittleCollection);
+            System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?");
+            System.out.println("y/n");
+            while (true) {
+                Scanner scanner = new Scanner(System.in);
+                String answer = scanner.nextLine();
+               if(answer.equals("y")){
+                        FileManager.clearFile();
+                        System.out.println("Сохранение перезаписано");
+                        break;
+                    }
+               else if(answer.equals("n")){
+                   String filePath = System.getenv("XML_FILE_PATH");
+                   MyLittleCollection.addAll(FileManager.readFile(filePath).getPeople());
+                   System.out.println("Сохранение восстановлено");
+                        return;
+                    }
+               else{
+                   System.err.println("Нет такого варианта ответа :(");
+            }
         }
+    }else{
+        FileManager.writeFile(MyLittleCollection);
     }
-    public void addToCollection(List<Person> people){
+
+}
+    public void addToCollection(List<Person> people) {
         MyLittleCollection.addAll(people);
     }
 }

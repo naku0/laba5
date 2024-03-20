@@ -3,41 +3,22 @@
     <added-people>
         <people>
             <coordinates>
-                <x>2.0</x>
-                <y>2.0</y>
-            </coordinates>
-            <creationDate>2024-03-20T09:35:10.667276100</creationDate>
-            <hairColor>RED</hairColor>
-            <height>2</height>
-            <id>996</id>
-            <location>
-                <location-name>2</location-name>
-                <x>2</x>
-                <y>2</y>
-                <z>2</z>
-            </location>
-            <person-name>2</person-name>
-            <nationality>CHINA</nationality>
-            <passportID>247</passportID>
-        </people>
-        <people>
-            <coordinates>
                 <x>1.0</x>
                 <y>1.0</y>
             </coordinates>
-            <creationDate>2024-03-20T09:35:14.712124200</creationDate>
+            <creationDate>2024-03-20T12:49:53.610620</creationDate>
             <hairColor>GREEN</hairColor>
             <height>1</height>
-            <id>841</id>
+            <id>679</id>
             <location>
-                <location-name></location-name>
+                <location-name>1</location-name>
                 <x>1</x>
                 <y>1</y>
                 <z>1</z>
             </location>
             <person-name>1</person-name>
             <nationality>SPAIN</nationality>
-            <passportID>741</passportID>
+            <passportID>564</passportID>
         </people>
     </added-people>
 </community>
