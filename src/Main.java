@@ -7,6 +7,7 @@ public class Main {
         CollectionManager collectionManager = new CollectionManager();
         Input input = new Input(commandManager, collectionManager);
         input.addCommands(commandManager);
+        input.addData();
         input.listen();
         /*Принтер принтер = new Принтер("Принтер");
         принтер.печатать();*/

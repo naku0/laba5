@@ -2,6 +2,10 @@ package data;
 
 import Interfaces.Validatable;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Location implements Validatable {
     private long x;
     private int y;
@@ -12,6 +16,45 @@ public class Location implements Validatable {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.name = name;
+    }
+
+    public Location() {
+    }
+
+    @XmlElement
+    public long getX() {
+        return x;
+    }
+
+    public void setX(long x) {
+        this.x = x;
+    }
+
+    @XmlElement
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @XmlElement
+    public Long getZ() {
+        return z;
+    }
+
+    public void setZ(Long z) {
+        this.z = z;
+    }
+
+    @XmlElement(name = "location-name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

@@ -3,6 +3,7 @@ package Builder;
 import Exceptions.InvalidDataException;
 import data.*;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 public class PersonBuilder extends Builder {
@@ -12,7 +13,7 @@ public class PersonBuilder extends Builder {
         return new Person(
                 new NameBuilder().create(),
                 new CoordinateBuilder().create(),
-                ZonedDateTime.now(),
+                new LocalDateTimeBuilder().create(),
                 intBuilder(" рост"),
                 new BuilderOfEnum<>(Color.class, "цвета").listen(),
                 new BuilderOfEnum<>(Country.class, "национальности").listen(),

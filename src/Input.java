@@ -1,6 +1,8 @@
 import Managers.CollectionManager;
 import Managers.CommandManager;
+import Managers.FileManager;
 import commands.*;
+import data.Community;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -44,5 +46,12 @@ public class Input {
         commandManager.addCommand(new Reorder(this.collectionManager));
         commandManager.addCommand(new Save(this.collectionManager));
         commandManager.addCommand(new Shuffle(this.collectionManager));
+    }
+    public void addData(){
+        String filePath = System.getenv("XML_FILE_PATH");
+        Community community = FileManager.readFile(filePath);
+        if (community != null) {
+            collectionManager.addToCollection(community.getPeople());
+        }
     }
 }

@@ -144,10 +144,11 @@ public class CollectionManager {
         if (MyLittleCollection.isEmpty()) {
             System.err.println("Нельзя сохранить то, чего нет. Давайте что-нибудь создадим!");
         } else {
-            for (Person person : MyLittleCollection) {
-                FileManager.writeToXmlFile(MyLittleCollection, person);
-            }
+                FileManager.writeFile(MyLittleCollection);
         }
+    }
+    public void addToCollection(List<Person> people){
+        MyLittleCollection.addAll(people);
     }
 }
 
