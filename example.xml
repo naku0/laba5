@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<community>
+    <added-people>
+        <people>
+            <coordinates>
+                <x>1.0</x>
+                <y>1.0</y>
+            </coordinates>
+            <creationDate>2024-03-21T10:05:26.714484200</creationDate>
+            <hairColor>GREEN</hairColor>
+            <height>1</height>
+            <id>393</id>
+            <location>
+                <location-name>1</location-name>
+                <x>1</x>
+                <y>1</y>
+                <z>1</z>
+            </location>
+            <person-name>1</person-name>
+            <nationality>SPAIN</nationality>
+            <passportID>45</passportID>
+        </people>
+    </added-people>
+</community>
+

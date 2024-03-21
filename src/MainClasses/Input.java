@@ -1,9 +1,12 @@
+package MainClasses;
+
 import Managers.CollectionManager;
 import Managers.CommandManager;
 import Managers.FileManager;
 import commands.*;
 import data.Community;
 
+import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -11,6 +14,7 @@ public class Input {
     private final CommandManager commandManager;
     private final CollectionManager collectionManager;
     Scanner scanner = new Scanner(System.in);
+
 
     public Input(CommandManager commandManager, CollectionManager collectionManager) {
         this.commandManager = commandManager;
@@ -46,6 +50,8 @@ public class Input {
         commandManager.addCommand(new Reorder(this.collectionManager));
         commandManager.addCommand(new Save(this.collectionManager));
         commandManager.addCommand(new Shuffle(this.collectionManager));
+        commandManager.addCommand(new AddIfMax(this.collectionManager));
+        commandManager.addCommand(new ExecuteScript(this.collectionManager, this.commandManager));
     }
     public void addData(){
         String filePath = System.getenv("XML_FILE_PATH");

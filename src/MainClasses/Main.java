@@ -1,3 +1,6 @@
+package MainClasses;
+
+import MainClasses.Input;
 import Managers.CollectionManager;
 import Managers.CommandManager;
 

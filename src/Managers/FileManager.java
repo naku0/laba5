@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileManager {
-    static String filePath = System.getenv("XML_FILE_PATH");
+    static String filePath = System.getenv("FILE_PATH" )+ "example.xml";
 
     public static Community readFile(String filePath) {
         File file = new File(filePath);
@@ -43,7 +43,7 @@ public class FileManager {
         File file = new File(filePath);
         try {
             if (filePath == null) {
-                System.err.println("Переменная окружения XML_FILE_PATH не установлена");
+                System.err.println("Переменная окружения FILE_PATH не установлена");
                 return;
             }
             if(!(file.length()==0)){

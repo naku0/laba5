@@ -3,9 +3,12 @@ package Managers;
 import Builder.PersonBuilder;
 import Exceptions.EmptyCollectionException;
 import Exceptions.InvalidDataException;
+import MainClasses.Input;
 import data.Color;
 import data.Person;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
@@ -27,24 +30,25 @@ public class CollectionManager {
         }
         return true;
     }
-    public void help(){
+
+    public void help() {
         System.out.println("""
-        help : вывести справку по доступным командам
-        info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-        show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
-        add {element} : добавить новый элемент в коллекцию
-        update id {element} : обновить значение элемента коллекции, id которого равен заданному
-        remove_by_id id : удалить элемент из коллекции по его id
-        clear : очистить коллекцию
-        save : сохранить коллекцию в файл
-        execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
-        exit : завершить программу (без сохранения в файл)
-        add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
-        shuffle : перемешать элементы коллекции в случайном порядке
-        reorder : отсортировать коллекцию в порядке, обратном нынешнему
-        print_field_ascending_passport_i_d : вывести значения поля passportID всех элементов в порядке возрастания
-        print_field_descending_height : вывести значения поля height всех элементов в порядке убывания
-        print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);""");
+                help : вывести справку по доступным командам
+                info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+                show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
+                add {element} : добавить новый элемент в коллекцию
+                update id {element} : обновить значение элемента коллекции, id которого равен заданному
+                remove_by_id id : удалить элемент из коллекции по его id
+                clear : очистить коллекцию
+                save : сохранить коллекцию в файл
+                execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
+                exit : завершить программу (без сохранения в файл)
+                add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции
+                shuffle : перемешать элементы коллекции в случайном порядке
+                reorder : отсортировать коллекцию в порядке, обратном нынешнему
+                print_field_ascending_passport_i_d : вывести значения поля passportID всех элементов в порядке возрастания
+                print_field_descending_height : вывести значения поля height всех элементов в порядке убывания
+                print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);""");
     }
 
     public Person getPersonById(long id) {
@@ -163,37 +167,54 @@ public class CollectionManager {
             while (true) {
                 Scanner scanner = new Scanner(System.in);
                 String answer = scanner.nextLine();
-               if(answer.equals("y")){
-                        FileManager.clearFile();
-                        System.out.println("Сохранение перезаписано");
-                        break;
-                    }
-               else if(answer.equals("n")){
-                   String filePath = System.getenv("XML_FILE_PATH");
-                   MyLittleCollectionOfPeople.addAll(FileManager.readFile(filePath).getPeople());
-                   System.out.println("Сохранение восстановлено");
-                        return;
-                    }
-               else{
-                   System.err.println("Нет такого варианта ответа :(");
+                if (answer.equals("y")) {
+                    FileManager.clearFile();
+                    System.out.println("Сохранение перезаписано");
+                    break;
+                } else if (answer.equals("n")) {
+                    String filePath = System.getenv("FILE_PATH") + "example.xml";
+                    MyLittleCollectionOfPeople.addAll(FileManager.readFile(filePath).getPeople());
+                    System.out.println("Сохранение восстановлено");
+                    return;
+                } else {
+                    System.err.println("Нет такого варианта ответа :(");
+                }
             }
+        } else {
+            FileManager.writeFile(MyLittleCollectionOfPeople);
         }
-    }else{
-        FileManager.writeFile(MyLittleCollectionOfPeople);
+
     }
 
-}
     public void addToCollection(List<Person> people) {
         MyLittleCollectionOfPeople.addAll(people);
     }
 
-    public void addIfMax(Long id){
+    public void addIfMax(Long id) {
         Collections.sort(MyLittleCollectionOfPeople);
-        if(MyLittleCollectionOfPeople.get(MyLittleCollectionOfPeople.size()-1).getId() < id){
+        if (MyLittleCollectionOfPeople.get(MyLittleCollectionOfPeople.size() - 1).getId() < id) {
             PersonBuilder newPerson = new PersonBuilder();
             Person person = newPerson.create();
             person.setId(id);
             MyLittleCollectionOfPeople.add(person);
+        } else {
+            System.err.println("Элемент меньше максимального!");
+        }
+    }
+    public void executeScript(String filePath, CommandManager commandManager) {
+        try (Scanner scriptScanner = new Scanner(new File(filePath))) {
+            while (scriptScanner.hasNextLine()) {
+                String commandToSplit = (scriptScanner.nextLine().trim() + " ").toLowerCase();
+                String[] commandParts = commandToSplit.split(" ", 2);
+                String commandName = commandParts[0];
+                String args = (commandParts.length > 1) ? commandParts[1] : "";
+
+                commandManager.execute(commandName, args);
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Файл скрипта не найден: " + filePath);
+        } catch (NoSuchElementException e) {
+            System.err.println("Ошибка чтения файла скрипта: " + filePath);
         }
     }
 }
