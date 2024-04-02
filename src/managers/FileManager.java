@@ -1,16 +1,15 @@
-package Managers;
+package managers;
 
 import data.Community;
 import data.*;
 
 import javax.xml.bind.*;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class FileManager {
-    static String filePath = System.getenv("FILE_PATH" )+ "example.xml";
+    static String filePath = System.getenv("FILE_PATH" ) + "example.xml";
 
     public static Community readFile(String filePath) {
         File file = new File(filePath);

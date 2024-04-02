@@ -1,12 +1,11 @@
-package MainClasses;
+package mainClasses;
 
-import Managers.CollectionManager;
-import Managers.CommandManager;
-import Managers.FileManager;
+import managers.CollectionManager;
+import managers.CommandManager;
+import managers.FileManager;
 import commands.*;
 import data.Community;
 
-import java.io.InputStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -54,7 +53,7 @@ public class Input {
         commandManager.addCommand(new ExecuteScript(this.collectionManager, this.commandManager));
     }
     public void addData(){
-        String filePath = System.getenv("XML_FILE_PATH");
+        String filePath = System.getenv("FILE_PATH")+"example.xml";
         Community community = FileManager.readFile(filePath);
         if (community != null) {
             collectionManager.addToCollection(community.getPeople());

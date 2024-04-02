@@ -1,6 +1,6 @@
 package commands;
 
-import Interfaces.CommandExecutor;
+import interfaces.CommandExecutor;
 
 public abstract class Command implements CommandExecutor {
     private final String name;

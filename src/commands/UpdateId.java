@@ -1,16 +1,16 @@
 package commands;
 
-import Builder.PersonBuilder;
-import Exceptions.InvalidDataException;
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
-import data.Person;
+import exceptions.InvalidDataException;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UpdateId extends Command implements CommandExecutor {
+    public static boolean isFromFile = false;
     private final CollectionManager collectionManager;
+    private Scanner method;
 
     public UpdateId(CollectionManager collectionManager) {
         super("update");

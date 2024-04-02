@@ -1,6 +1,6 @@
 package commands;
 
-import Managers.CollectionManager;
+import managers.CollectionManager;
 
 
 public class Save extends Command{

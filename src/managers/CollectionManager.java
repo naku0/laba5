@@ -1,9 +1,11 @@
-package Managers;
+package managers;
 
-import Builder.PersonBuilder;
-import Exceptions.EmptyCollectionException;
-import Exceptions.InvalidDataException;
-import MainClasses.Input;
+import builder.PersonBuilder;
+import commands.Add;
+import commands.ExecuteScript;
+import commands.UpdateId;
+import exceptions.EmptyCollectionException;
+import exceptions.InvalidDataException;
 import data.Color;
 import data.Person;
 
@@ -66,7 +68,7 @@ public class CollectionManager {
             person.setId(person.generateId());
         }
         MyLittleCollectionOfPeople.add(person);
-        Collections.sort(MyLittleCollectionOfPeople);
+
     }
 
     public void updateID(Long id) throws InvalidDataException, NoSuchElementException {
@@ -83,14 +85,13 @@ public class CollectionManager {
 
 
     public void show() throws EmptyCollectionException {
+        Collections.sort(MyLittleCollectionOfPeople);
         if (!MyLittleCollectionOfPeople.isEmpty()) {
             System.out.println("Содержимое коллекции:");
             for (Person i : MyLittleCollectionOfPeople) {
-                {
-                    System.out.println(i);
-                }
-
+                System.out.println(i);
             }
+
         } else {
             throw new EmptyCollectionException();
         }
@@ -161,29 +162,32 @@ public class CollectionManager {
     }
 
     public void save() {
-        if (MyLittleCollectionOfPeople.isEmpty()) {
-            System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?");
-            System.out.println("y/n");
-            while (true) {
-                Scanner scanner = new Scanner(System.in);
-                String answer = scanner.nextLine();
-                if (answer.equals("y")) {
-                    FileManager.clearFile();
-                    System.out.println("Сохранение перезаписано");
-                    break;
-                } else if (answer.equals("n")) {
-                    String filePath = System.getenv("FILE_PATH") + "example.xml";
-                    MyLittleCollectionOfPeople.addAll(FileManager.readFile(filePath).getPeople());
-                    System.out.println("Сохранение восстановлено");
-                    return;
-                } else {
-                    System.err.println("Нет такого варианта ответа :(");
+        try {
+            if (MyLittleCollectionOfPeople.isEmpty()) {
+                System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?");
+                System.out.println("y/n");
+                while (true) {
+                    Scanner scanner = new Scanner(System.in);
+                    String answer = scanner.nextLine();
+                    if (answer.equals("y")) {
+                        FileManager.clearFile();
+                        System.out.println("Сохранение перезаписано");
+                        break;
+                    } else if (answer.equals("n")) {
+                        String filePath = System.getenv("FILE_PATH") + "example.xml";
+                        MyLittleCollectionOfPeople.addAll(FileManager.readFile(filePath).getPeople());
+                        System.out.println("Сохранение восстановлено");
+                        return;
+                    } else {
+                        System.err.println("Нет такого варианта ответа :(");
+                    }
                 }
+            } else {
+                FileManager.writeFile(MyLittleCollectionOfPeople);
             }
-        } else {
-            FileManager.writeFile(MyLittleCollectionOfPeople);
+        } catch (NullPointerException e) {
+            System.out.println("Что-то пошло не так, попробуйте снова");
         }
-
     }
 
     public void addToCollection(List<Person> people) {
@@ -201,14 +205,15 @@ public class CollectionManager {
             System.err.println("Элемент меньше максимального!");
         }
     }
+    public static Scanner reader;
     public void executeScript(String filePath, CommandManager commandManager) {
         try (Scanner scriptScanner = new Scanner(new File(filePath))) {
+            reader = scriptScanner;
             while (scriptScanner.hasNextLine()) {
                 String commandToSplit = (scriptScanner.nextLine().trim() + " ").toLowerCase();
                 String[] commandParts = commandToSplit.split(" ", 2);
                 String commandName = commandParts[0];
                 String args = (commandParts.length > 1) ? commandParts[1] : "";
-
                 commandManager.execute(commandName, args);
             }
         } catch (FileNotFoundException e) {

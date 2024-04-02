@@ -1,8 +1,8 @@
 package commands;
 
-import Exceptions.EmptyCollectionException;
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
+import exceptions.EmptyCollectionException;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
 public class Show extends Command implements CommandExecutor {
     CollectionManager collectionManager;

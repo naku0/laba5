@@ -1,7 +1,8 @@
-package Builder;
+package builder;
 
-import data.Coordinates;
 import data.Location;
+
+import java.util.Scanner;
 
 public class LocationBuilder extends Builder{
     public Location create() {

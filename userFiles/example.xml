@@ -20,6 +20,44 @@
             <nationality>SPAIN</nationality>
             <passportID>45</passportID>
         </people>
+        <people>
+            <coordinates>
+                <x>3.0</x>
+                <y>3.0</y>
+            </coordinates>
+            <creationDate>2024-03-30T08:36:44.347614400</creationDate>
+            <hairColor>YELLOW</hairColor>
+            <height>3</height>
+            <id>175</id>
+            <location>
+                <location-name></location-name>
+                <x>3</x>
+                <y>3</y>
+                <z>3</z>
+            </location>
+            <person-name>3</person-name>
+            <nationality>ITALY</nationality>
+            <passportID>383</passportID>
+        </people>
+        <people>
+            <coordinates>
+                <x>4.0</x>
+                <y>4.0</y>
+            </coordinates>
+            <creationDate>2024-03-30T08:36:34.431155600</creationDate>
+            <hairColor>BROWN</hairColor>
+            <height>44</height>
+            <id>784</id>
+            <location>
+                <location-name></location-name>
+                <x>4</x>
+                <y>4</y>
+                <z>4</z>
+            </location>
+            <person-name>4</person-name>
+            <nationality>THAILAND</nationality>
+            <passportID>982</passportID>
+        </people>
     </added-people>
 </community>
 

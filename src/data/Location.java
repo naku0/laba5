@@ -1,6 +1,6 @@
 package data;
 
-import Interfaces.Validatable;
+import interfaces.Validatable;
 
 import javax.xml.bind.annotation.*;
 

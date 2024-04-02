@@ -1,15 +1,17 @@
-package Builder;
+package builder;
 
+import java.io.InputStream;
 import java.util.Scanner;
 
-public class BuilderOfEnum<T extends Enum<T>> {
+public class BuilderOfEnum<T extends Enum<T>> extends Builder{
     private final T[] values;
-    private final Scanner scanner = new Scanner(System.in);
     private final String name;
+    private Scanner scanner;
 
-    public BuilderOfEnum(Class<T> enumClass, String name) {
+    public BuilderOfEnum(Class<T> enumClass, String name, Scanner scanner) {
         this.values = enumClass.getEnumConstants();
         this.name = name;
+        this.scanner = scanner;
     }
 
     public T listen() {

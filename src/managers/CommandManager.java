@@ -1,10 +1,8 @@
-package Managers;
+package managers;
 
 import commands.Command;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.NoSuchElementException;
 
 public class CommandManager {
     private final LinkedHashMap<String, Command> commands = new LinkedHashMap<>();

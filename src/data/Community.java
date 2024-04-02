@@ -1,9 +1,6 @@
 package data;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Community {
         people.add(person);
     }
 
-    public List<Person> getPeople() {
+    public List<Person> getPeople()throws NullPointerException{
         return people;
     }
 }

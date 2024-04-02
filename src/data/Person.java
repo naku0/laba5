@@ -1,11 +1,8 @@
 package data;
 
-import Exceptions.InvalidDataException;
-import Interfaces.Validatable;
+import interfaces.Validatable;
 
 import javax.xml.bind.annotation.*;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 
 public class Person implements Validatable, Comparable<Person> {
@@ -58,8 +55,6 @@ public class Person implements Validatable, Comparable<Person> {
     public long generatePassport() {
         return Objects.hash(id);
     }
-
-
 
     @XmlElement
     public long getId() {
@@ -172,6 +167,6 @@ public class Person implements Validatable, Comparable<Person> {
 
     @Override
     public int compareTo(Person other) {
-        return Long.compare(this.id, other.id);
+        return Long.compare(this.height, other.height);
     }
 }

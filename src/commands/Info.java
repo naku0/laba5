@@ -1,7 +1,7 @@
 package commands;
 
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
 public class Info extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;

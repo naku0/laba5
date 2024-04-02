@@ -1,8 +1,8 @@
 package commands;
 
-import Exceptions.EmptyCollectionException;
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
+import exceptions.EmptyCollectionException;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 import data.Person;
 
 public class ShowHeight extends Command implements CommandExecutor {

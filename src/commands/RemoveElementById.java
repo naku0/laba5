@@ -1,7 +1,7 @@
 package commands;
 
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
 import java.util.NoSuchElementException;
 

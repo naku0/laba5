@@ -1,9 +1,16 @@
-package Builder;
+package builder;
 
+import commands.ExecuteScript;
+import managers.CollectionManager;
 import java.util.Scanner;
 
+
 public abstract class Builder {
-    private final Scanner scanner = new Scanner(System.in);
+    protected static Scanner scanner;
+
+    public Builder(){
+        scanner = (ExecuteScript.isFromFile) ? CollectionManager.reader : new Scanner(System.in);
+    }
 
     public String stringBuilder(String name) {
         System.out.println("Введите " + name);

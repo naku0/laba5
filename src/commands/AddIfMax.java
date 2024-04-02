@@ -1,13 +1,15 @@
 package commands;
 
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
-import java.util.Collections;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class AddIfMax extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
+    private Scanner method;
+    public static boolean isFromFile;
 
     public AddIfMax(CollectionManager collectionManager) {
         super("add_if_max");

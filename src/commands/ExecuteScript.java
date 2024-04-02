@@ -1,13 +1,14 @@
 package commands;
 
-import Managers.CollectionManager;
-import Managers.CommandManager;
-
+import managers.CollectionManager;
+import managers.CommandManager;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class ExecuteScript extends Command{
     private final CollectionManager collectionManager;
     private final CommandManager commandManager;
+    public static boolean isFromFile = false;
     public ExecuteScript(CollectionManager collectionManager, CommandManager commandManager) {
         super("execute_script");
         this.collectionManager = collectionManager;
@@ -16,6 +17,7 @@ public class ExecuteScript extends Command{
 
     @Override
     public void execute(String args) {
+            isFromFile = true;
             if (args.trim().isEmpty()) {
                 throw new NoSuchElementException("Идентификатор не указан");
             }

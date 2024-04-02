@@ -1,7 +1,7 @@
 package commands;
 
 
-import Interfaces.CommandExecutor;
+import interfaces.CommandExecutor;
 
 public class Exit extends Command implements CommandExecutor {
 
@@ -11,6 +11,6 @@ public Exit(){
     @Override
     public void execute(String args) {
         System.out.println("Надеюсь, мы скоро снова увидимся!");
-        System.exit(0);
+        System.exit(1);
     }
 }

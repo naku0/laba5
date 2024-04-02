@@ -1,4 +1,7 @@
-package Builder;
+package builder;
+
+import java.util.Scanner;
+
 public class NameBuilder extends Builder {
     public String create() throws IllegalArgumentException{
         while (true) {

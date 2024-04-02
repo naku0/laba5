@@ -1,13 +1,11 @@
-package Builder;
+package builder;
 
-import Exceptions.InvalidDataException;
 import data.*;
 
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class PersonBuilder extends Builder {
-
     public Person create() {
         System.out.println("Время создать человека: ");
         return new Person(
@@ -15,8 +13,8 @@ public class PersonBuilder extends Builder {
                 new CoordinateBuilder().create(),
                 new LocalDateTimeBuilder().create(),
                 intBuilder(" рост"),
-                new BuilderOfEnum<>(Color.class, "цвета").listen(),
-                new BuilderOfEnum<>(Country.class, "национальности").listen(),
+                new BuilderOfEnum<>(Color.class, "цвета", Builder.scanner).listen(),
+                new BuilderOfEnum<>(Country.class, "национальности", Builder.scanner).listen(),
                 new LocationBuilder().create()
         );
     }

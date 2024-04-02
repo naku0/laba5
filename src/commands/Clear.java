@@ -1,8 +1,7 @@
 package commands;
 
-import Interfaces.CommandExecutor;
-import Managers.CollectionManager;
-import Managers.CommandManager;
+import interfaces.CommandExecutor;
+import managers.CollectionManager;
 
 public class Clear extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
