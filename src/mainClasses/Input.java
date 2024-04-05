@@ -9,17 +9,23 @@ import data.Community;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс, обрабатывающий ввод пользователя
+ */
 public class Input {
     private final CommandManager commandManager;
     private final CollectionManager collectionManager;
     Scanner scanner = new Scanner(System.in);
-
 
     public Input(CommandManager commandManager, CollectionManager collectionManager) {
         this.commandManager = commandManager;
         this.collectionManager = collectionManager;
     }
 
+    /**
+     * Метод, ожидающий ввод пользователя
+     * @throws NoSuchElementException если пользователь ввел пустую строку
+     */
     public void listen() throws NoSuchElementException {
         while (true) {
             try {
@@ -33,6 +39,10 @@ public class Input {
         }
     }
 
+    /**
+     * Метод, добавляющий команды в менеджер
+     * @param commandManager Менеджер команд
+     */
     public void addCommands(CommandManager commandManager) {
         System.out.println("Введите команду 'help' для того, чтобы вывести все доступные команды.");
         commandManager.addCommand(new Exit());
@@ -52,6 +62,10 @@ public class Input {
         commandManager.addCommand(new AddIfMax(this.collectionManager));
         commandManager.addCommand(new ExecuteScript(this.collectionManager, this.commandManager));
     }
+
+    /**
+     * Метод, добавляющий данные из xml в коллекцию
+     */
     public void addData(){
         String filePath = System.getenv("FILE_PATH")+"example.xml";
         Community community = FileManager.readFile(filePath);

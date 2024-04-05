@@ -3,17 +3,31 @@ package builder;
 import java.io.InputStream;
 import java.util.Scanner;
 
+/**
+ *
+ * @param <T>
+ */
 public class BuilderOfEnum<T extends Enum<T>> extends Builder{
     private final T[] values;
     private final String name;
     private Scanner scanner;
 
+    /**
+     *
+     * @param enumClass
+     * @param name
+     * @param scanner
+     */
     public BuilderOfEnum(Class<T> enumClass, String name, Scanner scanner) {
         this.values = enumClass.getEnumConstants();
         this.name = name;
         this.scanner = scanner;
     }
 
+    /**
+     *
+     * @return
+     */
     public T listen() {
         while (true) {
             System.out.println("Доступные " + name + ":");

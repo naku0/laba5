@@ -12,6 +12,11 @@ public class Add extends Command implements CommandExecutor {
     public static boolean isFromFile = false;
     private Scanner method;
     private final CollectionManager collectionManager;
+
+    /**
+     * Конструктор команды "add"
+     * @param collectionManager
+     */
     public Add(CollectionManager collectionManager) {
         super("add");
         this.collectionManager = collectionManager;

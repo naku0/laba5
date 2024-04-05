@@ -2,13 +2,14 @@ package builder;
 
 import commands.ExecuteScript;
 import managers.CollectionManager;
+
 import java.util.Scanner;
 
 
 public abstract class Builder {
     protected static Scanner scanner;
 
-    public Builder(){
+    public Builder() {
         scanner = (ExecuteScript.isFromFile) ? CollectionManager.reader : new Scanner(System.in);
     }
 

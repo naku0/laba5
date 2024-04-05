@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Еnum, описывающий страну проживания
+ */
 @XmlType(name = "Country")
 @XmlEnum
 public enum Country {

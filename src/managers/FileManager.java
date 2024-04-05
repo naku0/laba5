@@ -8,9 +8,17 @@ import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Класс для работы с файлом
+ */
 public class FileManager {
     static String filePath = System.getenv("FILE_PATH" ) + "example.xml";
 
+    /**
+     * Чтение из файла
+     * @param filePath путь к файлу
+     * @return список людей
+     */
     public static Community readFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -38,6 +46,10 @@ public class FileManager {
         return null;
     }
 
+    /**
+     * Запись в файл
+     * @param collection список людей, необходимый для записи
+     */
     public static void writeFile(List<Person> collection) {
         File file = new File(filePath);
         try {
@@ -71,6 +83,10 @@ public class FileManager {
             System.err.println("Недостаточно прав доступа для доступа к переменной окружения или файлу");
         }
     }
+
+    /**
+     * Очистка файла
+     */
     public static void clearFile() {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
