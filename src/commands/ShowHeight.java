@@ -5,6 +5,9 @@ import interfaces.CommandExecutor;
 import managers.CollectionManager;
 import data.Person;
 
+/**
+ * Класс, реализующий команду "show_height"
+ */
 public class ShowHeight extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
 

@@ -4,6 +4,9 @@ import exceptions.EmptyCollectionException;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс команды reorder
+ */
 public class Reorder extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public Reorder(CollectionManager collectionManager) {

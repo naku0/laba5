@@ -4,7 +4,9 @@ import data.*;
 
 import java.io.InputStream;
 import java.util.Scanner;
-
+/**
+ * Класс для создания Person
+ */
 public class PersonBuilder extends Builder {
     public Person create() {
         System.out.println("Время создать человека: ");

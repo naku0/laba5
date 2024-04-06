@@ -4,19 +4,20 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 /**
- *
+ * Класс, реализующий билдер для перечислений
  * @param <T>
  */
 public class BuilderOfEnum<T extends Enum<T>> extends Builder{
+
     private final T[] values;
     private final String name;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
-     *
-     * @param enumClass
-     * @param name
-     * @param scanner
+     *Конструктор билдера для перечислений
+     * @param enumClass тип перечисления
+     * @param name имя перечисления
+     * @param scanner способ ввода
      */
     public BuilderOfEnum(Class<T> enumClass, String name, Scanner scanner) {
         this.values = enumClass.getEnumConstants();
@@ -25,8 +26,8 @@ public class BuilderOfEnum<T extends Enum<T>> extends Builder{
     }
 
     /**
-     *
-     * @return
+     * Метод, возвращающий перечисление
+     * @return перечисление
      */
     public T listen() {
         while (true) {

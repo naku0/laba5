@@ -5,6 +5,9 @@ import managers.CommandManager;
 
 import java.util.*;
 
+/**
+ * Класс команды execute_script.
+ */
 public class ExecuteScript extends Command{
     private final CollectionManager collectionManager;
     private final CommandManager commandManager;

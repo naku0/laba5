@@ -3,6 +3,9 @@ package commands;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс команды info
+ */
 public class Info extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public Info(CollectionManager collectionManager) {

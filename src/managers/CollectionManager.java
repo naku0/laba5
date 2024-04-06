@@ -88,6 +88,7 @@ public class CollectionManager {
 
     }
     /**
+     * Метод, обновляющий элемент коллекции
      * @param id id элемента
      * @throws InvalidDataException неверно введенные данные
      * @throws NoSuchElementException отсутствие элемента в коллекции
@@ -105,8 +106,8 @@ public class CollectionManager {
     }
 
     /**
-     * @throws EmptyCollectionException отсутствие элементов в коллекции
      * Метод, выводящий содержимое коллекции
+     * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
     public void show() throws EmptyCollectionException {
         Collections.sort(MyLittleCollectionOfPeople);
@@ -162,10 +163,10 @@ public class CollectionManager {
     }
 
     /**
-     *
-     * @param mapper
-     * @param reversed
-     * @throws EmptyCollectionException
+     * Показать количество элементов в коллекции по заданному критерию
+     * @param mapper маппер который применится к каждому элементу коллекции
+     * @param reversed показывать ли коллекцию в обратном порядке
+     * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
     public void showData(Function<Person, Integer> mapper, boolean reversed) throws EmptyCollectionException {
         List<Integer> data = new ArrayList<>(MyLittleCollectionOfPeople.size());
@@ -250,8 +251,6 @@ public class CollectionManager {
     /**
      * Добавит новый элемент в коллекцию, если его поле минимально
      * @param id id объекта, добавляемый в коллекцию
-     * @throws InvalidDataException неверно введенные данные
-     * @throws EmptyCollectionException коллекция пуста
      */
 
     public void addIfMax(Long id) {
@@ -290,6 +289,7 @@ public class CollectionManager {
                 }
                 executedScripts.add(args);
                 commandManager.execute(commandName, args);
+                executedScripts.remove(args);
             }
         } catch (FileNotFoundException e) {
             System.err.println("Файл скрипта не найден: " + filePath);

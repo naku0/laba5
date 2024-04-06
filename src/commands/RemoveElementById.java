@@ -5,6 +5,9 @@ import managers.CollectionManager;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Класс команды remove_by_id
+ */
 public class RemoveElementById extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public RemoveElementById(CollectionManager collectionManager) {

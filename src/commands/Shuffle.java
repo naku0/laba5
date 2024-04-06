@@ -4,6 +4,9 @@ import exceptions.EmptyCollectionException;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс, реализующий команду shuffle
+ */
 public class Shuffle extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public Shuffle(CollectionManager collectionManager) {

@@ -4,6 +4,9 @@ import exceptions.EmptyCollectionException;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс команды show
+ */
 public class Show extends Command implements CommandExecutor {
     CollectionManager collectionManager;
 

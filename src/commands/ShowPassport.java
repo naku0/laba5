@@ -4,6 +4,9 @@ import exceptions.EmptyCollectionException;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс, реализующий команду show
+ */
 public class ShowPassport extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
     public ShowPassport(CollectionManager collectionManager) {

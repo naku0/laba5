@@ -3,6 +3,7 @@ package mainClasses;
 import managers.CollectionManager;
 import managers.CommandManager;
 
+
 public class Main {
     public static void main(String[] args) {
         System.out.println(System.getenv("FILE_PATH"));

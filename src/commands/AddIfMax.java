@@ -6,10 +6,11 @@ import managers.CollectionManager;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс команды add_if_max
+ */
 public class AddIfMax extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
-    private Scanner method;
-    public static boolean isFromFile;
 
     public AddIfMax(CollectionManager collectionManager) {
         super("add_if_max");

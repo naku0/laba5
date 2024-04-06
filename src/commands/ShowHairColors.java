@@ -4,6 +4,9 @@ import exceptions.EmptyCollectionException;
 import interfaces.CommandExecutor;
 import managers.CollectionManager;
 
+/**
+ * Класс реализующий команду "print_field_descending_hair_color"
+ */
 public class ShowHairColors extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
 

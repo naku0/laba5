@@ -7,6 +7,9 @@ import managers.CollectionManager;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс, реализующий команду update_id
+ */
 public class UpdateId extends Command implements CommandExecutor {
     public static boolean isFromFile = false;
     private final CollectionManager collectionManager;
