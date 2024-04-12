@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
+
 /**
  * Класс, хранящий и взаимодействующий с коллекцией
  */
@@ -26,6 +27,7 @@ public class CollectionManager {
 
     /**
      * Метод, проверяющий уникальность id
+     *
      * @param person объект, передаваемый в метод
      * @return true, если id уникальный, false, если нет
      */
@@ -61,8 +63,10 @@ public class CollectionManager {
                 print_field_descending_height : вывести значения поля height всех элементов в порядке убывания
                 print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);""");
     }
+
     /**
      * Позволяет найти объект, id которого равен введенному
+     *
      * @param id id, вводимый пользователем
      * @return объект, id которого равен введенному
      */
@@ -74,8 +78,10 @@ public class CollectionManager {
         }
         return null;
     }
+
     /**
      * Метод, добавляющий новый элемент в коллекцию
+     *
      * @param person объект, который будет добавлен в коллекцию
      * @throws InvalidDataException неверно введенные данные
      */
@@ -87,10 +93,12 @@ public class CollectionManager {
         MyLittleCollectionOfPeople.add(person);
 
     }
+
     /**
      * Метод, обновляющий элемент коллекции
+     *
      * @param id id элемента
-     * @throws InvalidDataException неверно введенные данные
+     * @throws InvalidDataException   неверно введенные данные
      * @throws NoSuchElementException отсутствие элемента в коллекции
      */
     public void updateID(Long id) throws InvalidDataException, NoSuchElementException {
@@ -107,6 +115,7 @@ public class CollectionManager {
 
     /**
      * Метод, выводящий содержимое коллекции
+     *
      * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
     public void show() throws EmptyCollectionException {
@@ -133,6 +142,7 @@ public class CollectionManager {
 
     /**
      * Удалит элемент по его id
+     *
      * @param person объект, который будет удален
      * @throws NoSuchElementException отсутствие элемента в коллекции
      */
@@ -164,7 +174,8 @@ public class CollectionManager {
 
     /**
      * Показать количество элементов в коллекции по заданному критерию
-     * @param mapper маппер который применится к каждому элементу коллекции
+     *
+     * @param mapper   маппер который применится к каждому элементу коллекции
      * @param reversed показывать ли коллекцию в обратном порядке
      * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
@@ -195,6 +206,7 @@ public class CollectionManager {
 
     /**
      * Показать цвета волос
+     *
      * @throws EmptyCollectionException
      */
     public void showHairColors() throws EmptyCollectionException {
@@ -245,11 +257,41 @@ public class CollectionManager {
         }
     }
 
+    /**
+     * Метод, добавляющий объекты из файла в коллекцию
+     * @param people объекты из файла
+     */
     public void addToCollection(List<Person> people) {
-        MyLittleCollectionOfPeople.addAll(people);
+        if (checkId(people)) {
+            MyLittleCollectionOfPeople.addAll(people);
+        } else {
+            System.err.println("что-то не так с файлом, данные не подгрузились");
+        }
     }
+
+    /**
+     * Метод, проверяющий на одинаковые id в коллекции
+     * @param people коллекция людей
+     * @return true, если все id уникальны, и false если нет
+     */
+    public boolean checkId(List<Person> people) {
+        HashSet<Long> idCollection = new HashSet<>();
+        if (people.size() != 1) {
+            for (Person person : people) {
+                if (!idCollection.contains(person.getId())) {
+                    idCollection.add(person.getId());
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
+
     /**
      * Добавит новый элемент в коллекцию, если его поле минимально
+     *
      * @param id id объекта, добавляемый в коллекцию
      */
 
@@ -264,24 +306,26 @@ public class CollectionManager {
             System.err.println("Элемент меньше максимального!");
         }
     }
+
     public static Scanner reader;
 
     /**
      * Сохраняем скрипт
-     * @param filePath путь до скрипта
-     * @param commandManager Менеджер команд, где хранятся команды для скрипта
+     *
+     * @param filePath        путь до скрипта
+     * @param commandManager  Менеджер команд, где хранятся команды для скрипта
      * @param executedScripts выполненные скрипты
      */
     public void executeScript(String filePath, CommandManager commandManager, Set<String> executedScripts) {
-        try(Scanner scriptScanner = new Scanner(new File(filePath))) {
+        try (Scanner scriptScanner = new Scanner(new File(filePath))) {
             reader = scriptScanner;
             while (scriptScanner.hasNextLine()) {
                 String commandToSplit = (scriptScanner.nextLine().trim() + " ").toLowerCase();
                 String[] commandParts = commandToSplit.split(" ", 2);
                 String commandName = commandParts[0];
                 String args = (commandParts.length > 1) ? commandParts[1] : "";
-                if(commandName.equals("execute_script")){
-                    if (executedScripts.contains(args)){
+                if (commandName.equals("execute_script")) {
+                    if (executedScripts.contains(args)) {
                         System.err.println("Найдена рекурсия, заканчиваю читать файл");
                         executedScripts.clear();
                         break;
@@ -295,7 +339,7 @@ public class CollectionManager {
             System.err.println("Файл скрипта не найден: " + filePath);
         } catch (NoSuchElementException e) {
             System.err.println("Ошибка чтения файла скрипта: " + filePath);
-        }catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             System.err.println("Чиним программу, можете продолжать работу");
         }
     }

@@ -27,5 +27,6 @@ public class Community {
     public List<Person> getPeople()throws NullPointerException{
         return people;
     }
+
 }
 

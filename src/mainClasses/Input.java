@@ -1,5 +1,6 @@
 package mainClasses;
 
+import data.Person;
 import managers.CollectionManager;
 import managers.CommandManager;
 import managers.FileManager;
@@ -72,5 +73,6 @@ public class Input {
         if (community != null) {
             collectionManager.addToCollection(community.getPeople());
         }
+
     }
 }
