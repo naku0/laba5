@@ -19,7 +19,7 @@ public class ShowPassport extends Command implements CommandExecutor {
         try{
         collectionManager.showData(person -> Integer.parseInt(person.getPassportID()), false);
         }catch (EmptyCollectionException e){
-            System.err.println("В коллекции ещё ничего нет, но это можно исправить!");
+            System.err.println("В коллекции ещё ничего нет, но это можно исправить!\n");
         }
     }
 }

@@ -20,13 +20,13 @@ public class RemoveElementById extends Command implements CommandExecutor {
         try {
             int id = Integer.parseInt(args.trim());
             collectionManager.removeElement(collectionManager.getPersonById(id));
-            System.out.println("Этого человечка больше нет с нами");
+            System.out.println("Этого человечка больше нет с нами\n");
         }
         catch (NoSuchElementException e){
-            System.err.println("Такого человека нет, возможно вы ошиблись с id");
+            System.err.println("Такого человека нет, возможно вы ошиблись с id\n");
         }
         catch (NumberFormatException e){
-            System.err.println("Поле 'id' должно быть типа 'int'!");
+            System.err.println("Поле 'id' должно быть типа 'int'!\n");
         }
     }
 }

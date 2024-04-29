@@ -61,7 +61,8 @@ public class CollectionManager {
                 reorder : отсортировать коллекцию в порядке, обратном нынешнему
                 print_field_ascending_passport_i_d : вывести значения поля passportID всех элементов в порядке возрастания
                 print_field_descending_height : вывести значения поля height всех элементов в порядке убывания
-                print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);""");
+                print_field_descending_hair_color : вывести значения поля hairColor всех элементов в порядке убывания);
+                """);
     }
 
     /**
@@ -71,6 +72,7 @@ public class CollectionManager {
      * @return объект, id которого равен введенному
      */
     public Person getPersonById(long id) {
+
         for (Person person : MyLittleCollectionOfPeople) {
             if (id == person.getId()) {
                 return person;
@@ -86,12 +88,12 @@ public class CollectionManager {
      * @throws InvalidDataException неверно введенные данные
      */
     public void add(Person person) throws InvalidDataException {
-        if (!(person.validated())) throw new InvalidDataException();
-        if (idIdentifier(person)) {
-            person.setId(person.generateId());
-        }
-        MyLittleCollectionOfPeople.add(person);
-
+            Collections.sort(MyLittleCollectionOfPeople);
+            if (!(person.validated())) throw new InvalidDataException();
+            if (idIdentifier(person)) {
+                person.setId(person.generateId());
+            }
+            MyLittleCollectionOfPeople.add(person);
     }
 
     /**
@@ -102,9 +104,10 @@ public class CollectionManager {
      * @throws NoSuchElementException отсутствие элемента в коллекции
      */
     public void updateID(Long id) throws InvalidDataException, NoSuchElementException {
+        Collections.sort(MyLittleCollectionOfPeople);
         Person oldPerson = getPersonById(id);
         if (oldPerson == null) {
-            throw new NoSuchElementException("Такого человечка нет в коллекции, возможно вы ошиблись");
+            throw new NoSuchElementException("Такого человечка нет в коллекции, возможно вы ошиблись\n");
         }
         MyLittleCollectionOfPeople.remove(oldPerson);
         PersonBuilder person = new PersonBuilder();
@@ -119,13 +122,12 @@ public class CollectionManager {
      * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
     public void show() throws EmptyCollectionException {
-        Collections.sort(MyLittleCollectionOfPeople);
+
         if (!MyLittleCollectionOfPeople.isEmpty()) {
             System.out.println("Содержимое коллекции:");
             for (Person i : MyLittleCollectionOfPeople) {
                 System.out.println(i);
             }
-
         } else {
             throw new EmptyCollectionException();
         }
@@ -138,6 +140,8 @@ public class CollectionManager {
         System.out.println("Сохраняемый тип данных: " + Person.class +
                 ", количество человек: " + MyLittleCollectionOfPeople.size() +
                 ", дата инициализации:" + localdate);
+        System.out.println("\n");
+
     }
 
     /**
@@ -160,7 +164,7 @@ public class CollectionManager {
     public void reorder() throws EmptyCollectionException {
         if (MyLittleCollectionOfPeople.isEmpty()) throw new EmptyCollectionException();
         Collections.reverse(MyLittleCollectionOfPeople);
-        System.out.println("Коллекция перевернулась!");
+        System.out.println("Коллекция перевернулась!\n");
     }
 
     /**
@@ -169,7 +173,7 @@ public class CollectionManager {
     public void shuffle() throws EmptyCollectionException {
         if (MyLittleCollectionOfPeople.isEmpty()) throw new EmptyCollectionException();
         Collections.shuffle(MyLittleCollectionOfPeople);
-        System.out.println("Коллекция перемешалась!");
+        System.out.println("Коллекция перемешалась!\n");
     }
 
     /**
@@ -180,6 +184,7 @@ public class CollectionManager {
      * @throws EmptyCollectionException отсутствие элементов в коллекции
      */
     public void showData(Function<Person, Integer> mapper, boolean reversed) throws EmptyCollectionException {
+        Collections.sort(MyLittleCollectionOfPeople);
         List<Integer> data = new ArrayList<>(MyLittleCollectionOfPeople.size());
         for (Person person : MyLittleCollectionOfPeople) {
             data.add(mapper.apply(person));
@@ -197,26 +202,26 @@ public class CollectionManager {
      */
     public void clear() {
         if (MyLittleCollectionOfPeople.isEmpty()) {
-            System.err.println("Нельзя очистить то, что пусто. Давайте для начала внесем данные");
+            System.err.println("Нельзя очистить то, что пусто. Давайте для начала внесем данные\n");
         } else {
             MyLittleCollectionOfPeople.clear();
-            System.out.println("Коллекция очищена!");
+            System.out.println("Коллекция очищена!\n");
         }
     }
 
     /**
      * Показать цвета волос
-     *
-     * @throws EmptyCollectionException
+     * @throws EmptyCollectionException если коллекция пустая
      */
     public void showHairColors() throws EmptyCollectionException {
+        Collections.sort(MyLittleCollectionOfPeople);
         Class<Color> colorClass = Color.class;
         Color[] values = colorClass.getEnumConstants();
         List<String> existingHair = new ArrayList<>(MyLittleCollectionOfPeople.size());
         for (Person person : MyLittleCollectionOfPeople) {
-            for (int i = 0; i < values.length; i++) {
-                if (values[i].equals(person.getHairColor())) {
-                    existingHair.add(i, (String.valueOf(person.getHairColor())));
+            for (Color value : values) {
+                if (value.equals(person.getHairColor())) {
+                    existingHair.add(String.valueOf(person.getHairColor()));
                     break;
                 }
             }
@@ -229,10 +234,11 @@ public class CollectionManager {
      * Сохранение коллекции в xml
      */
     public void save() {
+        Collections.sort(MyLittleCollectionOfPeople);
         try {
             if (MyLittleCollectionOfPeople.isEmpty()) {
-                System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?");
-                System.out.println("y/n");
+                System.err.println("Похоже у вас в коллекции ничего нет, если вы сохраните пустую коллекцию, то ваше прошлое сохранение уничтожится! Точно ли вы хотите этого?\n");
+                System.out.println("y/n\n");
                 while (true) {
                     Scanner scanner = new Scanner(System.in);
                     String answer = scanner.nextLine();
@@ -253,7 +259,7 @@ public class CollectionManager {
                 FileManager.writeFile(MyLittleCollectionOfPeople);
             }
         } catch (NullPointerException e) {
-            System.out.println("Что-то пошло не так, попробуйте снова");
+            System.out.println("Что-то пошло не так, попробуйте снова\n");
         }
     }
 
@@ -265,7 +271,7 @@ public class CollectionManager {
         if (checkId(people)) {
             MyLittleCollectionOfPeople.addAll(people);
         } else {
-            System.err.println("что-то не так с файлом, данные не подгрузились");
+            System.err.println("что-то не так с файлом, данные не подгрузились\n");
         }
     }
 
@@ -292,18 +298,18 @@ public class CollectionManager {
     /**
      * Добавит новый элемент в коллекцию, если его поле минимально
      *
-     * @param id id объекта, добавляемый в коллекцию
+     * @param height рост человека, добавляемый в коллекцию
      */
 
-    public void addIfMax(Long id) {
+    public void addIfMax(Integer height) {
         Collections.sort(MyLittleCollectionOfPeople);
-        if (MyLittleCollectionOfPeople.get(MyLittleCollectionOfPeople.size() - 1).getId() < id) {
+        if (MyLittleCollectionOfPeople.get(MyLittleCollectionOfPeople.size() - 1).getHeight() < height) {
             PersonBuilder newPerson = new PersonBuilder();
             Person person = newPerson.create();
-            person.setId(id);
+            person.setHeight(height);
             MyLittleCollectionOfPeople.add(person);
         } else {
-            System.err.println("Элемент меньше максимального!");
+            System.err.println("Элемент меньше максимального!\n");
         }
     }
 
@@ -317,6 +323,7 @@ public class CollectionManager {
      * @param executedScripts выполненные скрипты
      */
     public void executeScript(String filePath, CommandManager commandManager, Set<String> executedScripts) {
+        Collections.sort(MyLittleCollectionOfPeople);
         try (Scanner scriptScanner = new Scanner(new File(filePath))) {
             reader = scriptScanner;
             while (scriptScanner.hasNextLine()) {
@@ -326,7 +333,7 @@ public class CollectionManager {
                 String args = (commandParts.length > 1) ? commandParts[1] : "";
                 if (commandName.equals("execute_script")) {
                     if (executedScripts.contains(args)) {
-                        System.err.println("Найдена рекурсия, заканчиваю читать файл");
+                        System.err.println("Найдена рекурсия, заканчиваю читать файл\n");
                         executedScripts.clear();
                         break;
                     }
@@ -336,11 +343,11 @@ public class CollectionManager {
                 executedScripts.remove(args);
             }
         } catch (FileNotFoundException e) {
-            System.err.println("Файл скрипта не найден: " + filePath);
+            System.err.println("Файл скрипта не найден: " + filePath +"\n");
         } catch (NoSuchElementException e) {
-            System.err.println("Ошибка чтения файла скрипта: " + filePath);
+            System.err.println("Некорректный ввод, что-то не так с файлом скрипта!\n");
         } catch (IllegalStateException e) {
-            System.err.println("Чиним программу, можете продолжать работу");
+            System.err.println("Чиним программу, можете продолжать работу\n");
         }
     }
 }

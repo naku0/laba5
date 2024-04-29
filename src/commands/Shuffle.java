@@ -19,7 +19,7 @@ public class Shuffle extends Command implements CommandExecutor {
         try {
             collectionManager.shuffle();
         }catch (EmptyCollectionException e){
-            System.err.println("В коллекции ещё ничего нет, но это можно исправить!");
+            System.err.println("В коллекции ещё ничего нет, но это можно исправить!\n");
         }
     }
 }

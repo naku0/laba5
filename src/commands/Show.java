@@ -21,7 +21,7 @@ public class Show extends Command implements CommandExecutor {
             collectionManager.show();
 
         } catch (EmptyCollectionException e) {
-            System.err.println("В коллекции ещё ничего нет, но это можно исправить!");
+            System.err.println("В коллекции ещё ничего нет, но это можно исправить!\n");
         }
     }
 }

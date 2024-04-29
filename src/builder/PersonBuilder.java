@@ -14,7 +14,7 @@ public class PersonBuilder extends Builder {
                 new NameBuilder().create(),
                 new CoordinateBuilder().create(),
                 new LocalDateTimeBuilder().create(),
-                intBuilder(" рост"),
+                new HeightBuilder().create(),
                 new BuilderOfEnum<>(Color.class, "цвета", Builder.scanner).listen(),
                 new BuilderOfEnum<>(Country.class, "национальности", Builder.scanner).listen(),
                 new LocationBuilder().create()

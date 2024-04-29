@@ -19,7 +19,7 @@ public class Reorder extends Command implements CommandExecutor {
         try {
             collectionManager.reorder();
         }catch (EmptyCollectionException e){
-            System.err.println("В коллекции ещё ничего нет, но это можно исправить!");
+            System.err.println("В коллекции ещё ничего нет, но это можно исправить!\n");
         }
     }
 }

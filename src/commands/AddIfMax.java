@@ -23,8 +23,8 @@ public class AddIfMax extends Command implements CommandExecutor {
             if (args.trim().isEmpty()) {
                 throw new NoSuchElementException("Идентификатор не указан");
             }
-            long id = Long.parseLong(args.trim());
-            collectionManager.addIfMax(id);
+            int height = Integer.parseInt(args.trim());
+            collectionManager.addIfMax(height);
         }catch (NoSuchElementException e){
             System.out.println("Мы не нашли такого человечка, cкорее всего вы ошиблись с id");
         }
