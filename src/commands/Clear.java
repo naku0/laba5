@@ -8,6 +8,7 @@ import managers.CollectionManager;
  */
 public class Clear extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
+
     public Clear(CollectionManager collectionManager) {
         super("clear");
         this.collectionManager = collectionManager;

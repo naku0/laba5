@@ -2,6 +2,8 @@ package managers;
 
 import data.Community;
 import data.*;
+import exceptions.ReadPermissionDenied;
+import exceptions.WritePermissionDenied;
 
 import javax.xml.bind.*;
 import java.io.*;
@@ -19,8 +21,9 @@ public class FileManager {
      * @param filePath путь к файлу
      * @return список людей
      */
-    public static Community readFile(String filePath) {
+    public static Community readFile(String filePath) throws ReadPermissionDenied {
         File file = new File(filePath);
+        if (!file.canRead()) throw new ReadPermissionDenied();
         if (!file.exists()) {
             System.err.println("Файл не найден");
             return null;
@@ -50,8 +53,9 @@ public class FileManager {
      * Запись в файл
      * @param collection список людей, необходимый для записи
      */
-    public static void writeFile(List<Person> collection) {
+    public static void writeFile(List<Person> collection) throws WritePermissionDenied {
         File file = new File(filePath);
+        if (!file.canWrite()) throw new WritePermissionDenied();
         try {
             if (filePath == null) {
                 System.err.println("Переменная окружения FILE_PATH не установлена");

@@ -22,9 +22,9 @@ public class Add extends Command implements CommandExecutor {
     @Override
     public void execute(String args) {
         try {
-        collectionManager.add(new PersonBuilder().create());
-        System.out.println("Человек успешно добавлен!");
-        }catch (InvalidDataException e){
+            collectionManager.add(new PersonBuilder().create());
+            System.out.println("Человек успешно добавлен!");
+        } catch (InvalidDataException e) {
             System.err.println("Что-то пошло не так, попробуй ещё раз!");
         }
     }

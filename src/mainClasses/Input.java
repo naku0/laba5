@@ -1,6 +1,7 @@
 package mainClasses;
 
 import data.Person;
+import exceptions.ReadPermissionDenied;
 import managers.CollectionManager;
 import managers.CommandManager;
 import managers.FileManager;
@@ -30,9 +31,9 @@ public class Input {
     public void listen() throws NoSuchElementException {
         while (true) {
             try {
-                String CommandToSplit = (scanner.nextLine().trim() + " ").toLowerCase();
+                String CommandToSplit = scanner.nextLine().trim() + " ";
                 String[] command = CommandToSplit.split(" ", 2);
-                commandManager.execute(command[0], command[1]);
+                commandManager.execute(command[0].toLowerCase(), command[1]);
             } catch (NoSuchElementException e) {
                 System.err.println("давайте не будем так делать >:(");
                 break;
@@ -68,11 +69,15 @@ public class Input {
      * Метод, добавляющий данные из xml в коллекцию
      */
     public void addData(){
-        String filePath = System.getenv("FILE_PATH")+"example.xml";
-        Community community = FileManager.readFile(filePath);
-        if (community != null) {
-            collectionManager.addToCollection(community.getPeople());
+        try {
+            String filePath = System.getenv("FILE_PATH") + "example.xml";
+            Community community = FileManager.readFile(filePath);
+            if (community != null) {
+                collectionManager.addToCollection(community.getPeople());
+            }
         }
-
+        catch(ReadPermissionDenied e){
+            System.err.println("Недостаточно прав для чтения :(");
+        }
     }
 }

@@ -18,6 +18,8 @@ public enum Color {
     YELLOW,
     @XmlEnumValue("BROWN")
     BROWN;
+    String name;
+
 
 }
 

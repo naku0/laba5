@@ -11,7 +11,7 @@ public class ShowHairColors extends Command implements CommandExecutor {
     private final CollectionManager collectionManager;
 
     public ShowHairColors(CollectionManager collectionManager) {
-        super("`print_field_descending_hair_color`");
+        super("print_field_descending_hair_color");
         this.collectionManager = collectionManager;
     }
 

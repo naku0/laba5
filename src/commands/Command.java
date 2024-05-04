@@ -10,6 +10,7 @@ public abstract class Command implements CommandExecutor {
 
     /**
      * Конструктор команды
+     *
      * @param name имя команды
      */
     public Command(String name) {

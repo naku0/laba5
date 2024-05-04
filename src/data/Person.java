@@ -263,7 +263,6 @@ public class Person implements Validatable, Comparable<Person> {
                 '}';
     }
 
-
     @Override
     public int compareTo(Person other) {
         return Long.compare(this.height, other.height);
