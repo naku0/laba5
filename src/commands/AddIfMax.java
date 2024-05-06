@@ -21,11 +21,7 @@ public class AddIfMax extends Command implements CommandExecutor {
     @Override
     public void execute(String args) {
         try {
-            if (args.trim().isEmpty()) {
-                throw new NoSuchElementException("Идентификатор не указан");
-            }
-            int height = Integer.parseInt(args.trim());
-            collectionManager.addIfMax(height);
+            collectionManager.addIfMax();
         } catch (NoSuchElementException e) {
             System.err.println("Мы не нашли такого человечка, cкорее всего вы ошиблись");
         } catch (NumberFormatException e) {

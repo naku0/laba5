@@ -88,11 +88,11 @@ public class CollectionManager {
      * @throws InvalidDataException неверно введенные данные
      */
     public void add(Person person) throws InvalidDataException {
-            if (!(person.validated())) throw new InvalidDataException();
-            if (idIdentifier(person)) {
-                person.setId(person.generateId());
-            }
-            myLittleCollectionOfPeople.add(person);
+        if (!(person.validated())) throw new InvalidDataException();
+        if (idIdentifier(person)) {
+            person.setId(person.generateId());
+        }
+        myLittleCollectionOfPeople.add(person);
         Collections.sort(myLittleCollectionOfPeople);
     }
 
@@ -211,11 +211,12 @@ public class CollectionManager {
 
     /**
      * Показать цвета волос
+     *
      * @throws EmptyCollectionException если коллекция пустая
      */
     public void showHairColors() throws EmptyCollectionException {
         Queue<Color> sortedUsedColors = new PriorityQueue<>(Collections.reverseOrder());
-        myLittleCollectionOfPeople.forEach(e->sortedUsedColors.add(e.getHairColor()));
+        myLittleCollectionOfPeople.forEach(e -> sortedUsedColors.add(e.getHairColor()));
         System.out.println(sortedUsedColors);
     }
 
@@ -249,15 +250,16 @@ public class CollectionManager {
             }
         } catch (NullPointerException e) {
             System.out.println("Что-то пошло не так, попробуйте снова\n");
-        } catch (WritePermissionDenied e){
+        } catch (WritePermissionDenied e) {
             System.err.println("Не могу записать в файл:(");
-        }catch (ReadPermissionDenied e){
+        } catch (ReadPermissionDenied e) {
             System.err.println("Не могу прочитать из файла:(");
         }
     }
 
     /**
      * Метод, добавляющий объекты из файла в коллекцию
+     *
      * @param people объекты из файла
      */
     public void addToCollection(List<Person> people) {
@@ -270,6 +272,7 @@ public class CollectionManager {
 
     /**
      * Метод, проверяющий на одинаковые id в коллекции
+     *
      * @param people коллекция людей
      * @return true, если все id уникальны, и false если нет
      */
@@ -289,20 +292,18 @@ public class CollectionManager {
     }
 
     /**
-     * Добавит новый элемент в коллекцию, если его поле минимально
-     *
-     * @param height рост человека, добавляемый в коллекцию
+     * Добавит новый элемент в коллекцию, если его рост больше максимального объекта в коллекции
      */
 
-    public void addIfMax(Integer height) throws InvalidDataException {
-        if (myLittleCollectionOfPeople.get(myLittleCollectionOfPeople.size() - 1).getHeight() < height) {
-            PersonBuilder newPerson = new PersonBuilder();
-            Person person = newPerson.create();
-            person.setHeight(height);
+    public void addIfMax() throws InvalidDataException {
+        Collections.sort(myLittleCollectionOfPeople);
+        PersonBuilder newPerson = new PersonBuilder();
+        Person person = newPerson.create();
+        if (person.getHeight() > Collections.max(myLittleCollectionOfPeople).getHeight()) {
             add(person);
-        } else {
+            System.out.println("Элемент добавлен!\n");
+        } else
             System.err.println("Элемент меньше максимального!\n");
-        }
     }
 
     public static Scanner reader;
@@ -326,7 +327,8 @@ public class CollectionManager {
                 String[] commandParts = commandToSplit.split(" ", 2);
                 String commandName = commandParts[0];
                 String args = (commandParts.length > 1) ? commandParts[1].trim() : "";
-                if (commandName.equals("execute_script") && executedScripts.contains(args)) throw new RecursionException();
+                if (commandName.equals("execute_script") && executedScripts.contains(args))
+                    throw new RecursionException();
                 commandManager.execute(commandName, args);
             }
             executedScripts.removeLast();
